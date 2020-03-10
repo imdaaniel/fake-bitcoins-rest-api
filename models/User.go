@@ -8,13 +8,13 @@ import (
 	"time"
 	"regexp"
 
-	"github.com/badoux/checkmail" 	// Validacao email
+	"github.com/badoux/checkmail" 	// Email validation
 	"github.com/jinzhu/gorm"		// ORM
-	"golang.org/x/crypto/bcrypt"	// Criptografia
+	"golang.org/x/crypto/bcrypt"	// Cryptography
 )
 
 type User struct {
-	ID				uint32		`gorm:"primary_key;auto_increment" json:"id"`
+	ID				uint64		`gorm:"primary_key;auto_increment" json:"id"`
 	Name 			string		`gorm:"size:60;not null;" json:"name"`
 	Email			string		`gorm:"size:100;not null;" json:"email"`
 	Password 		string		`gorm:"size:100;not null;" json:"password"`
