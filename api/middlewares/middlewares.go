@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/imdaaniel/rest-api/api/auth"
-	"github.com/imdaaniel/rest-api/api/responses"
+	"github.com/imdaaniel/bitcoins-rest-api/api/auth"
+	"github.com/imdaaniel/bitcoins-rest-api/api/responses"
 )
 
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {

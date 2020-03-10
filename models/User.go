@@ -3,24 +3,22 @@ package models
 import (
 	"errors"
 	"html"
-	"log"
 	"strings"
 	"time"
-	"regexp"
 
-	"github.com/badoux/checkmail" 	// Email validation
-	"github.com/jinzhu/gorm"		// ORM
-	"golang.org/x/crypto/bcrypt"	// Cryptography
+	"github.com/badoux/checkmail" // Email validation
+	"github.com/jinzhu/gorm"      // ORM
+	"golang.org/x/crypto/bcrypt"  // Cryptography
 )
 
 type User struct {
-	ID				uint64		`gorm:"primary_key;auto_increment" json:"id"`
-	Name 			string		`gorm:"size:60;not null;" json:"name"`
-	Email			string		`gorm:"size:100;not null;" json:"email"`
-	Password 		string		`gorm:"size:100;not null;" json:"password"`
-	DateOfBirth		string		`gorm:"not null" json:"dateofbirth"`
-	CreatedAt 		time.Time	`gorm:"default:CURRENT_TIMESTAMP" json:"createdat"`
-	UpdatedAt 		time.Time	`gorm:"default:CURRENT_TIMESTAMP" json:"updatedat"`
+	ID          uint64    `gorm:"primary_key;auto_increment" json:"id"`
+	Name        string    `gorm:"size:60;not null;" json:"name"`
+	Email       string    `gorm:"size:100;not null;" json:"email"`
+	Password    string    `gorm:"size:100;not null;" json:"password"`
+	DateOfBirth string    `gorm:"not null" json:"dateofbirth"`
+	CreatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"createdat"`
+	UpdatedAt   time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updatedat"`
 }
 
 func Hash(password string) ([]byte, error) {
@@ -33,13 +31,13 @@ func verifyPassword(hashedPassword, password string) error {
 
 func (u *User) BeforeSave() error {
 	hashedPassword, err := Hash(u.Password)
-	
+
 	if err != nil {
 		return err
 	}
 
 	u.Password = string(hashedPassword)
-	
+
 	return nil
 }
 
