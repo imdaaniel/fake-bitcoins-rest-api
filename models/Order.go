@@ -74,3 +74,22 @@ func (o *Order) FindUserOrders(db *gorm.DB, userID uint64) (*[]Order, error) {
 
 	return o, nil
 }
+
+func (o *Order) FindDayOrders(db *gorm.DB, day uint8) (*[]Order, error) {
+	var err error
+
+	orders := []Order{}
+	err = db.Debug().Model(&Order{}).Where("DATE_FORMAT(moment, '%d') = ?", day).Take(&o).Error
+
+	if err != nil {
+		return &[]Order{}, err
+	}
+	if o.ID != 0 {
+		err = db.Debug().Model(&User{}).Where("id = ?", o.AuthorID).Take(&o.Author).Error
+		if err != nil {
+			return &Order{}, err
+		}
+	}
+
+	return o, nil
+}

@@ -19,7 +19,7 @@ func (server *Server) CreateUser(res http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		responses.ERROR(res, http.statusUnprocessableEntity, err)
-		// return
+		return
 	}
 
 	user := models.User{}
