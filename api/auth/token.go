@@ -55,7 +55,7 @@ func ExtractToken(req *http.Request) string {
 	return ""
 }
 
-func ExtractTokenID(req *http.Request) (uint32, error) {
+func ExtractTokenID(req *http.Request) (uint64, error) {
 	tokenString := ExtractToken(req)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -68,11 +68,11 @@ func ExtractTokenID(req *http.Request) (uint32, error) {
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if ok && token.Valid {
-		uid, err := strconv.ParseUint(fmt.Sprintf("%.0f", claims["user_id"]), 10, 64	)
+		uid, err := strconv.ParseUint(fmt.Sprintf("%.0f", claims["user_id"]), 10, 64)
 		if err != nil {
 			return 0, err
 		}
-		return uint32(uid), nil
+		return uint64(uid), nil
 	}
 
 	return 0, nil

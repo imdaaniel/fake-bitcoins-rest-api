@@ -7,8 +7,10 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	"errors"
 
 	"github.com/gorilla/mux"
+	"github.com/imdaaniel/bitcoins-rest-api/api/auth"
 	"github.com/imdaaniel/bitcoins-rest-api/api/models"
 	"github.com/imdaaniel/bitcoins-rest-api/api/responses"
 	"github.com/imdaaniel/bitcoins-rest-api/api/utils/formaterror"
@@ -18,6 +20,18 @@ func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		responses.ERROR(res, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	tokenID, err := auth.ExtractTokenID(req)
+	if err != nil {
+		responses.ERROR(res, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}
+
+	userID, err := strconv.ParseUint(req.PostFormValue("author_id"), 10, 64)
+	if tokenID != userID {
+		responses.ERROR(res, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
 		return
 	}
 
