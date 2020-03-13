@@ -35,7 +35,7 @@ func (server *Server) Login(res http.ResponseWriter, req *http.Request) {
 
 	token, err := server.SignIn(user.Email, user.Password)
 	if err != nil {
-		formattedError := formaterror.Formaterror(err.Error())
+		formattedError := formaterror.FormatError(err.Error())
 		responses.JSON(res, http.StatusUnprocessableEntity, formattedError)
 		return
 	}

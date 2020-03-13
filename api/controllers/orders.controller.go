@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
+	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/imdaaniel/bitcoins-rest-api/api/models"
 	"github.com/imdaaniel/bitcoins-rest-api/api/responses"
 	"github.com/imdaaniel/bitcoins-rest-api/api/utils/formaterror"
@@ -14,20 +17,20 @@ import (
 func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		responses.ERROR(res, http.statusUnprocessableEntity, err)
+		responses.ERROR(res, http.StatusUnprocessableEntity, err)
 		return
 	}
 
 	order := models.Order{}
 	err = json.Unmarshal(body, &order)
 	if err != nil {
-		responses.ERROR(res, http.statusUnprocessableEntity, err)
+		responses.ERROR(res, http.StatusUnprocessableEntity, err)
 		return
 	}
 	order.Prepare()
-	err = order.Validate("")
+	err = order.Validate()
 	if err != nil {
-		responses.ERROR(res, http.statusUnprocessableEntity, err)
+		responses.ERROR(res, http.StatusUnprocessableEntity, err)
 		return
 	}
 	orderCreated, err := order.SaveOrder(server.DB)
@@ -39,9 +42,8 @@ func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
 	}
 
 	res.Header().Set("Location", fmt.Sprintf("%s%s/%d", req.Host, req.RequestURI, orderCreated.ID))
-	responsesJSON(res, http.StatusCreated, orderCreated)
+	responses.JSON(res, http.StatusCreated, orderCreated)
 }
-
 
 func (server *Server) GetOrdersByUser(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
@@ -65,14 +67,16 @@ func (server *Server) GetOrdersByUser(res http.ResponseWriter, req *http.Request
 func (server *Server) GetOrdersByDay(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 
-	day, err := strconv.ParseUint(vars["day"], 10, 8)
+	date := vars["date"]
+
+	validDate, err := time.Parse("2006-01-02", date)
 	if err != nil {
 		responses.ERROR(res, http.StatusBadRequest, err)
 		return
 	}
 
 	order := models.Order{}
-	orders, err := order.FindDayOrders(server.DB, uint8(day))
+	orders, err := order.FindDayOrders(server.DB, validDate.String())
 	if err != nil {
 		responses.ERROR(res, http.StatusBadRequest, err)
 		return
