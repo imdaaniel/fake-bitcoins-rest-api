@@ -12,6 +12,7 @@ github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5y
 github.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=
 github.com/gorilla/mux v1.7.4/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 github.com/imdaaniel/bitcoins-rest-api v0.0.0-20200311050200-947aa0c1ad68 h1:c35Hi+MF9wqJrhS4HF/334T2KD9dZgbfJKTt4+taX/w=
+github.com/imdaaniel/bitcoins-rest-api v0.0.0-20200312044310-7a8bf09de6fd h1:iuAYkgh7tk0ji0CjBf/h5Qr7FlFltaCjGMeMYA8/EEE=
 github.com/jinzhu/gorm v1.9.12 h1:Drgk1clyWT9t9ERbzHza6Mj/8FY/CqMyVzOiHviMo6Q=
 github.com/jinzhu/gorm v1.9.12/go.mod h1:vhTjlKSJUTWNtcbQtrMBFCxy7eXTzeCAzfL5fBZT/Qs=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
