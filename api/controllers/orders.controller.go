@@ -2,18 +2,19 @@ package controllers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
-	"errors"
 
 	"github.com/gorilla/mux"
 	"github.com/imdaaniel/bitcoins-rest-api/api/auth"
 	"github.com/imdaaniel/bitcoins-rest-api/api/models"
 	"github.com/imdaaniel/bitcoins-rest-api/api/responses"
 	"github.com/imdaaniel/bitcoins-rest-api/api/utils/formaterror"
+	// "github.com/imdaaniel/bitcoins-rest-api/api/utils/purshase"
 )
 
 func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
@@ -78,7 +79,7 @@ func (server *Server) GetOrdersByUser(res http.ResponseWriter, req *http.Request
 	responses.JSON(res, http.StatusOK, orders)
 }
 
-func (server *Server) GetOrdersByDay(res http.ResponseWriter, req *http.Request) {
+func (server *Server) GetOrdersByDate(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 
 	date := vars["date"]

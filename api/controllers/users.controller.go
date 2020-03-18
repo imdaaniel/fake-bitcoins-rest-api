@@ -42,3 +42,15 @@ func (server *Server) CreateUser(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Location", fmt.Sprintf("%s%s/%d", req.Host, req.RequestURI, userCreated.ID))
 	responses.JSON(res, http.StatusCreated, userCreated)
 }
+
+func (server *Server) GetUsers(res http.ResponseWriter, req *http.Request) {
+	user := models.User{}
+	users, err := user.FindUsers(server.DB)
+
+	if err != nil {
+		responses.ERROR(res, http.StatusBadRequest, err)
+		return
+	}
+
+	responses.JSON(res, http.StatusOK, users)
+}

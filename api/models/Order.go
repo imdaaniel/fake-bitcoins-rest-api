@@ -59,7 +59,7 @@ func (o *Order) FindUserOrders(db *gorm.DB, userID uint64) (*[]Order, error) {
 	var err error
 
 	orders := []Order{}
-	err = db.Debug().Model(&Order{}).Where("author = ?", userID).Limit(100).Find(&orders).Error
+	err = db.Debug().Model(&Order{}).Where("author_id = ?", userID).Limit(100).Find(&orders).Error
 
 	if err != nil {
 		return &[]Order{}, err

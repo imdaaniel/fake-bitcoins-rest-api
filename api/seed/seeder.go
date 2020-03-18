@@ -29,8 +29,13 @@ var orders = []models.Order{
 		Action:   "buy",
 	},
 	models.Order{
+		AuthorID: 2,
+		Amount:   5.43,
+		Action:   "buy",
+	},
+	models.Order{
 		AuthorID: 1,
-		Amount:   0.98,
+		Amount:   1.15,
 		Action:   "sell",
 	},
 }
@@ -56,7 +61,9 @@ func Load(db *gorm.DB) {
 		if err != nil {
 			log.Fatalf("Cannot seed users table: %v", err)
 		}
+	}
 
+	for i := range orders {
 		err = db.Debug().Model(&models.Order{}).Create(&orders[i]).Error
 		if err != nil {
 			log.Fatalf("Cannot seed orders table: %v", err)

@@ -91,3 +91,16 @@ func (u *User) SaveUser(db *gorm.DB) (*User, error) {
 	}
 	return u, nil
 }
+
+func (u *User) FindUsers(db *gorm.DB) (*[]User, error) {
+	var err error
+
+	users := []User{}
+	err = db.Debug().Model(&User{}).Limit(100).Find(&users).Error
+
+	if err != nil {
+		return &[]User{}, err
+	}
+	
+	return &users, err
+}
