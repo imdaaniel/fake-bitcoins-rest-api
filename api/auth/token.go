@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -55,7 +54,7 @@ func ExtractToken(req *http.Request) string {
 	return ""
 }
 
-func ExtractTokenID(req *http.Request) (uint64, error) {
+func ExtractTokenID(req *http.Request) (string, error) {
 	tokenString := ExtractToken(req)
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -64,18 +63,15 @@ func ExtractTokenID(req *http.Request) (uint64, error) {
 		return []byte(os.Getenv("API_SECRET")), nil
 	})
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if ok && token.Valid {
-		uid, err := strconv.ParseUint(fmt.Sprintf("%.0f", claims["user_id"]), 10, 64)
-		if err != nil {
-			return 0, err
-		}
-		return uint64(uid), nil
+		uid := fmt.Sprintf("%.0f", claims["user_id"])
+		return uid, nil
 	}
 
-	return 0, nil
+	return "", nil
 }
 
 // Pretty display the claims licely in the console

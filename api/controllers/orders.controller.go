@@ -7,18 +7,25 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/imdaaniel/bitcoins-rest-api/api/auth"
 	"github.com/imdaaniel/bitcoins-rest-api/api/models"
 	"github.com/imdaaniel/bitcoins-rest-api/api/responses"
+	"github.com/imdaaniel/bitcoins-rest-api/api/utils/bitcoin"
+	"github.com/imdaaniel/bitcoins-rest-api/api/utils/date"
 	"github.com/imdaaniel/bitcoins-rest-api/api/utils/formaterror"
-	// "github.com/imdaaniel/bitcoins-rest-api/api/utils/purshase"
 )
 
 func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
 	body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		responses.ERROR(res, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	order := models.Order{}
+	err = json.Unmarshal(body, &order)
 	if err != nil {
 		responses.ERROR(res, http.StatusUnprocessableEntity, err)
 		return
@@ -30,19 +37,20 @@ func (server *Server) CreateOrder(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	userID, err := strconv.ParseUint(req.PostFormValue("author_id"), 10, 64)
-	if tokenID != userID {
-		responses.ERROR(res, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
-		return
-	}
-
-	order := models.Order{}
-	err = json.Unmarshal(body, &order)
+	tokenIDint, err := strconv.ParseUint(tokenID, 10, 64)
 	if err != nil {
 		responses.ERROR(res, http.StatusUnprocessableEntity, err)
 		return
 	}
+	if tokenIDint != order.AuthorID {
+		responses.ERROR(res, http.StatusUnauthorized, errors.New(http.StatusText(http.StatusUnauthorized)))
+		return
+	}
+
 	order.Prepare()
+
+	order.Value = bitcoin.AmountToValue(order.Amount)
+
 	err = order.Validate()
 	if err != nil {
 		responses.ERROR(res, http.StatusUnprocessableEntity, err)
@@ -82,16 +90,15 @@ func (server *Server) GetOrdersByUser(res http.ResponseWriter, req *http.Request
 func (server *Server) GetOrdersByDate(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 
-	date := vars["date"]
+	getDate := vars["date"]
 
-	validDate, err := time.Parse("2006-01-02", date)
-	if err != nil {
-		responses.ERROR(res, http.StatusBadRequest, err)
+	if date.ValiDate(getDate) == false {
+		responses.ERROR(res, http.StatusExpectationFailed, errors.New("Invalid Date"))
 		return
 	}
 
 	order := models.Order{}
-	orders, err := order.FindDayOrders(server.DB, validDate.String())
+	orders, err := order.FindDayOrders(server.DB, getDate)
 	if err != nil {
 		responses.ERROR(res, http.StatusBadRequest, err)
 		return

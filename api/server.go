@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/imdaaniel/bitcoins-rest-api/api/controllers"
 	"github.com/imdaaniel/bitcoins-rest-api/api/seed"
+	"github.com/joho/godotenv"
 )
 
 var server = controllers.Server{}

@@ -1,4 +1,4 @@
-package purshase
+package bitcoin
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 )
 
 func GetBitcoinPrice() (value float64) {
-	err := godotenv.Load("../../../.env")
+	err := godotenv.Load()
 
 	if err != nil {
 		log.Fatalf("Error getting env. %v", err)
@@ -69,7 +69,7 @@ func GetBitcoinPrice() (value float64) {
 	return price
 }
 
-func AmountToPrice(amount float64) float64 {
+func AmountToValue(amount float64) float64 {
 	price := GetBitcoinPrice()
 
 	return amount * price

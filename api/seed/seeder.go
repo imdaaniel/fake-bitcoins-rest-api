@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/imdaaniel/bitcoins-rest-api/api/models"
+	"github.com/imdaaniel/bitcoins-rest-api/api/utils/bitcoin"
 	"github.com/jinzhu/gorm"
 )
 
@@ -26,16 +27,19 @@ var orders = []models.Order{
 	models.Order{
 		AuthorID: 1,
 		Amount:   1.23,
+		Value:    bitcoin.AmountToValue(1.23),
 		Action:   "buy",
 	},
 	models.Order{
 		AuthorID: 2,
 		Amount:   5.43,
+		Value:    bitcoin.AmountToValue(5.43),
 		Action:   "buy",
 	},
 	models.Order{
 		AuthorID: 1,
 		Amount:   1.15,
+		Value:    bitcoin.AmountToValue(1.15),
 		Action:   "sell",
 	},
 }
