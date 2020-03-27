@@ -32,6 +32,7 @@ Creation of an user. The expected parameters are:
 _Success response example_
 
 _HTTP 201 Created_
+
 ![](https://i.imgur.com/TrUqaCd.png)
 
 ## GET /users
@@ -41,6 +42,7 @@ List existing users.
 _Success response example_
 
 _HTTP 200 OK_
+
 ![](https://i.imgur.com/QeqBmcV.png)
 
 ## POST /login
@@ -52,7 +54,9 @@ There are the login. The expected parameters are:
 
 
 _Success response example_
+
 _HTTP 200 OK_
+
 ![](https://imgur.com/Mwpr3mc.png)
 
 ## POST /orders
@@ -65,7 +69,9 @@ Crete an order. The expected parameters are:
  - action (_String_) - "buy" or "sell"
 
 _Success response example_
+
 _HTTP 201 Created_
+
 ![](https://imgur.com/YvyM5tm.png)
 
 ## GET /orders/user/:id
@@ -75,7 +81,9 @@ List all orders of the user. The expected parameter are:
  - id - Ex.: 3
 
 _Success response example_
+
 _HTTP 200 OK_
+
 ![](https://imgur.com/8f78PkQ.png)
 
 
@@ -86,5 +94,7 @@ List all orders realized in the date. The expected parameter are:
  - date - Ex.: 2020-03-27
 
 _Success response example_
+
 _HTTP 200 OK_
+
 ![](https://imgur.com/HfCunOY.png)
