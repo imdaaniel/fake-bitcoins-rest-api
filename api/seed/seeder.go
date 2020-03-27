@@ -16,10 +16,10 @@ var users = []models.User{
 		DateOfBirth: "1979-03-18",
 	},
 	models.User{
-		Name:        "Elon Musk",
-		Email:       "elonmusk@gmail.com",
-		Password:    "password",
-		DateOfBirth: "1971-06-28",
+		Name:        "Bill Gates",
+		Email:       "billgates@microsoft.com",
+		Password:    "Iamtheroot@x123",
+		DateOfBirth: "1955-10-28",
 	},
 }
 
