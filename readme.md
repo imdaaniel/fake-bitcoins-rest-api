@@ -1,10 +1,10 @@
 # 📈 A RESTful API to buy/sell bitcoins 💸🌎
-## [Get started]
+# Get Started
 
-### Description
+## Description
 This is an **representational** application to buy and sell bitcoins built with [Go](https://golang.org/) (it means that you will not buy or sell real bitcoins here!).
 
-### Running
+## Running
 To run this application, you will need:
 
  1. [Install Go](https://golang.org/dl/)
