@@ -40,7 +40,7 @@ _Success response example_
 
 _HTTP 201 Created_
 
-![](https://imgur.com/nyepVIM.png)
+![](https://imgur.com/ws3nUWx.png)
 
 ## GET /users
 
