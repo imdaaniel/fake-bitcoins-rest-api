@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/badoux/checkmail" // Email validation
+	"github.com/badoux/checkmail"
 	"github.com/imdaaniel/bitcoins-rest-api/api/utils/date"
-	"github.com/jinzhu/gorm"     // ORM
-	"golang.org/x/crypto/bcrypt" // Cryptography
+	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {

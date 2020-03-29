@@ -40,7 +40,9 @@ func (server *Server) Login(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	responses.JSON(res, http.StatusOK, token)
+	responses.JSON(res, http.StatusOK, map[string]string{
+		"JWT": token,
+	})
 }
 
 func (server *Server) SignIn(email, password string) (string, error) {

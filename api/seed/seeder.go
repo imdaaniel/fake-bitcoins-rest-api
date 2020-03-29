@@ -29,18 +29,21 @@ var orders = []models.Order{
 		Amount:   1.23,
 		Value:    bitcoin.AmountToValue(1.23),
 		Action:   "buy",
+		Date:     "2020-03-27",
 	},
 	models.Order{
 		AuthorID: 2,
 		Amount:   5.43,
 		Value:    bitcoin.AmountToValue(5.43),
 		Action:   "buy",
+		Date:     "2020-03-27",
 	},
 	models.Order{
 		AuthorID: 1,
 		Amount:   1.15,
 		Value:    bitcoin.AmountToValue(1.15),
 		Action:   "sell",
+		Date:     "2020-03-27",
 	},
 }
 
