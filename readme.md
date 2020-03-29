@@ -14,7 +14,8 @@ To run this application, you will need:
 
 # Routes
 
-**Remember that all parameters should be passed in JSON format.**
+ - **Remember that all parameters should be passed in JSON format.**
+ - You can get the postman collection of this API [here](https://www.getpostman.com/collections/cac75a963200d813b55e)
 
 ## GET / (index)
 
