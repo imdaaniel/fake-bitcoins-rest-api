@@ -109,6 +109,14 @@ _HTTP 200 OK_
 
 ![](https://imgur.com/3N1wDOb.png)
 
-All routes have been documented, so it looks like
+# Database
+
+Database diagram
+
+![](https://imgur.com/x7tP4J1.png)
+
+# End
+
+All routes have been documented, so thanks for reading and...
 
 ![](https://media.giphy.com/media/upg0i1m4DLe5q/giphy.gif)
