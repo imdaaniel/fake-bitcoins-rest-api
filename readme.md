@@ -15,6 +15,7 @@ To run this application, you will need:
 # Routes
 
  - **Remember that all parameters should be passed in JSON format.**
+ - You can get the swagger version of this API [here](https://app.swaggerhub.com/apis/imdaaniel/bitcoins-exchange/1.0.0#/)
  - You can get the postman collection of this API [here](https://www.getpostman.com/collections/cac75a963200d813b55e)
 
 ## GET / (index)
@@ -40,7 +41,7 @@ _Success response example_
 
 _HTTP 201 Created_
 
-![](https://imgur.com/nyepVIM.png)
+![](https://imgur.com/ws3nUWx.png)
 
 ## GET /users
 
