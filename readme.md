@@ -2,7 +2,7 @@
 # Get Started
 
 ## Description
-This is an **representational** application to buy and sell bitcoins built with [Go](https://golang.org/) (it means that you will not buy or sell real bitcoins here!).
+This is a **representational** application to buy and sell bitcoins built with [Go](https://golang.org/) (it means that you will not buy or sell real bitcoins here!).
 
 ## Running
 To run this application, you will need:
